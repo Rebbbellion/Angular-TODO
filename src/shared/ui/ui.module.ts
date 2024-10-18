@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'shared/lib';
+import { HeaderComponent } from './header';
 
 @NgModule({
-  declarations: [],
+  declarations: [HeaderComponent],
   imports: [SharedModule],
-  exports: [],
+  exports: [HeaderComponent],
 })
 export class UiModule {}
