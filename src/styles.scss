@@ -1,0 +1,10 @@
+@import url(../public/scss/reset.scss);
+@import url(../public/fonts/fonts.scss);
+
+body {
+  font-family: Inter;
+  font-weight: 400;
+  line-height: 1.4;
+  color: white;
+  background-color: rgb(26, 26, 26);
+}
