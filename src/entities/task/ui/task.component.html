@@ -1,5 +1,5 @@
 <div class="title-block">
-  <h4>Task Title</h4>
+  <h4>{{ task.title }}</h4>
   <div>
     <svg class="edit">
       <use href="sprite.svg#edit"></use>
@@ -10,11 +10,10 @@
   </div>
 </div>
 <div class="desc-block">
-  <app-checkbox></app-checkbox>
+  <app-checkbox
+    [checkboxInputs]="{ checked: task.completed, id: task.apiId }"
+  ></app-checkbox>
   <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam quae
-    veritatis distinctio odio! Magnam, doloremque nostrum ratione ipsam
-    excepturi ipsa laudantium qui repudiandae dignissimos minus. Soluta cum
-    assumenda nulla inventore.
+    {{ task.desc }}
   </p>
 </div>
