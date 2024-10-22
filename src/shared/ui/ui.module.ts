@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'shared/lib';
+import { CheckboxComponent } from './checkbox';
 import { HeaderComponent } from './header';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, CheckboxComponent],
   imports: [SharedModule],
-  exports: [HeaderComponent],
+  exports: [HeaderComponent, CheckboxComponent],
 })
 export class UiModule {}
