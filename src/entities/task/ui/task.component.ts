@@ -5,6 +5,9 @@ import { Task } from '../model';
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
+  host: {
+    '[class.completed]': 'task.completed',
+  },
 })
 export class TaskComponent {
   @Input() task!: Task;
