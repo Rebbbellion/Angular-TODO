@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  width: 80%;
+  padding: 15px 15px 0px;
+  margin: 0px auto;
+}
+app-task {
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
