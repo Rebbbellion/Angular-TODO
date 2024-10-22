@@ -1,5 +1,10 @@
-<input type="checkbox" name="completed" value="true" id="completed" />
-<label for="completed">
+<input
+  type="checkbox"
+  name="completed"
+  [id]="'completed-' + checkboxInputs.id"
+  [checked]="checkboxInputs.checked"
+/>
+<label [for]="'completed-' + checkboxInputs.id">
   <svg class="check">
     <use href="sprite.svg#check"></use>
   </svg>
