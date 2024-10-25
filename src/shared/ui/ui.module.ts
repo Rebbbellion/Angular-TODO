@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from 'shared/lib';
 import { ButtonComponent } from './button';
 import { CheckboxComponent } from './checkbox';
+import { FormComponent } from './form';
 import { HeaderComponent } from './header';
 import { PopupComponent } from './popup';
 
@@ -11,6 +12,7 @@ import { PopupComponent } from './popup';
     CheckboxComponent,
     PopupComponent,
     ButtonComponent,
+    FormComponent,
   ],
   imports: [SharedModule],
   exports: [
@@ -18,6 +20,7 @@ import { PopupComponent } from './popup';
     CheckboxComponent,
     PopupComponent,
     ButtonComponent,
+    FormComponent,
   ],
 })
 export class UiModule {}
