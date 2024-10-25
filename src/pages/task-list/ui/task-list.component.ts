@@ -19,5 +19,6 @@ export class TaskListComponent implements OnInit {
       this.numberOfCreatedTasks = tasks.length;
       this.showLoader = false;
     });
+    this.data.editTask().subscribe();
   }
 }

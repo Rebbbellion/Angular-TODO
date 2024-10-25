@@ -3,6 +3,10 @@
   name="completed"
   [id]="'completed-' + checkboxInputs.id"
   [checked]="checkboxInputs.checked"
+  (input)="
+    checkboxInputs.checked = !checkboxInputs.checked;
+    checkboxInputEvent.emit(checkboxInputs.checked)
+  "
 />
 <label [for]="'completed-' + checkboxInputs.id">
   <svg class="check">

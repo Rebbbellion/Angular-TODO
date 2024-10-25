@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Task } from '../model';
+import { Component, inject, Input } from '@angular/core';
+import { Task, TaskService } from '../model';
 
 @Component({
   selector: 'app-task',
@@ -10,5 +10,7 @@ import { Task } from '../model';
   },
 })
 export class TaskComponent {
-  @Input() task!: Task;
+  @Input() public task!: Task;
+
+  public readonly taskService: TaskService = inject(TaskService);
 }

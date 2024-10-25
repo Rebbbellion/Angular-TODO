@@ -11,6 +11,10 @@
 </div>
 <div class="desc-block">
   <app-checkbox
+    (onCheck)="task.completed = $event"
+    (onCheck)="
+      taskService.taskEditSubject.next({ completed: $event, apiId: task.apiId })
+    "
     [checkboxInputs]="{ checked: task.completed, id: task.apiId }"
   ></app-checkbox>
   <p>
