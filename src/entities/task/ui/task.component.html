@@ -1,7 +1,7 @@
 <div class="title-block">
   <h4>{{ task.title }}</h4>
   <div>
-    <svg class="edit">
+    <svg class="edit" (click)="setTaskForEdit()">
       <use href="sprite.svg#edit"></use>
     </svg>
     <svg class="trash">
@@ -21,3 +21,11 @@
     {{ task.desc }}
   </p>
 </div>
+<app-popup *ngIf="taskOnEdit"
+  ><app-form
+    [formConfig]="formConfig"
+    [formValues]="taskOnEdit"
+    (formClose)="taskOnEdit = null"
+    (formSubmit)="taskService.taskEditSubject.next($event)"
+  ></app-form
+></app-popup>

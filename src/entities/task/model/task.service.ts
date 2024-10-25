@@ -23,7 +23,7 @@ export class TaskService {
     );
   }
 
-  public editTask(): Observable<Partial<Task>> {
+  public editTask(): Observable<TaskEditData> {
     return this.taskEditSubject.pipe(
       debounceTime(500),
       switchMap((taskEditData: TaskEditData) => {
