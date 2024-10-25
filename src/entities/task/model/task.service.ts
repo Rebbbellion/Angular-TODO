@@ -11,11 +11,13 @@ export class TaskService {
 
   public getTasks(): Observable<Task[]> {
     return this.data.getTasks().pipe(
-      map((tasks: TaskCollectionResponse) =>
-        Object.keys(tasks).map((taskId: string) => ({
-          ...tasks[taskId as keyof TaskCollectionResponse],
-          apiId: taskId,
-        }))
+      map((tasks: TaskCollectionResponse | null) =>
+        tasks
+          ? Object.keys(tasks).map((taskId: string) => ({
+              ...tasks[taskId as keyof TaskCollectionResponse],
+              apiId: taskId,
+            }))
+          : []
       ),
       first()
     );

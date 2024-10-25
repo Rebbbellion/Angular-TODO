@@ -11,7 +11,7 @@ export class FirebaseDataService {
   private readonly http: HttpClient = inject(HttpClient);
 
   @AuthenticateRequest()
-  public getTasks(): Observable<TaskCollectionResponse> {
+  public getTasks(): Observable<TaskCollectionResponse | null> {
     return this.http.get<TaskCollectionResponse>('tasks');
   }
 }
