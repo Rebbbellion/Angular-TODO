@@ -2,7 +2,9 @@
   <div class="tasks-created">
     Created tasks<span>{{ numberOfCreatedTasks }}</span>
   </div>
-  <div class="tasks-completed">Completed tasks<span></span></div>
+  <div class="tasks-completed">
+    Completed tasks<span>{{ getNumberOfCompletedTasks() }}</span>
+  </div>
 </div>
 <app-task *ngFor="let task of tasks" [task]="task"></app-task>
 <img src="loader.gif" alt="" *ngIf="showLoader" />

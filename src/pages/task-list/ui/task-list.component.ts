@@ -21,4 +21,7 @@ export class TaskListComponent implements OnInit {
     });
     this.data.editTask().subscribe();
   }
+  getNumberOfCompletedTasks(): number {
+    return this.tasks.filter(({ completed }) => completed).length;
+  }
 }
