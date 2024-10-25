@@ -1,0 +1,11 @@
+<div class="task-counters">
+  <div class="tasks-created">
+    Created tasks<span>{{ numberOfCreatedTasks }}</span>
+  </div>
+  <div class="tasks-completed">Completed tasks<span></span></div>
+</div>
+<app-task *ngFor="let task of tasks" [task]="task"></app-task>
+<img src="loader.gif" alt="" *ngIf="showLoader" />
+<p class="no-task" *ngIf="tasks.length == 0 && !showLoader">
+  You have not created any tasks yet
+</p>
