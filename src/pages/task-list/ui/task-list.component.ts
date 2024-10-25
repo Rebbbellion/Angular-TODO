@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Task, TaskService } from 'entities/task';
+import { Task, TaskEditData, TaskService } from 'entities/task';
 
 @Component({
   selector: 'app-task-list',
@@ -19,5 +19,30 @@ export class TaskListComponent implements OnInit {
       this.numberOfCreatedTasks = tasks.length;
       this.showLoader = false;
     });
+    this.data.editTask().subscribe((taskEditData: TaskEditData) => {
+      this.editTask(taskEditData);
+    });
+  }
+  getNumberOfCompletedTasks(): number {
+    return this.tasks.filter(({ completed }) => completed).length;
+  }
+
+  editTask(taskEditData: TaskEditData): void {
+    const taskIndex = this.tasks.findIndex(
+      ({ apiId }) => apiId === taskEditData.apiId
+    );
+
+    if (taskIndex === -1) {
+      return;
+    }
+
+    const taskToEdit = this.tasks[taskIndex];
+
+    for (const key in taskEditData) {
+      const taskKey = key as keyof Task;
+      if (taskEditData[taskKey] !== undefined) {
+        (taskToEdit[taskKey] as Task[keyof Task]) = taskEditData[taskKey];
+      }
+    }
   }
 }

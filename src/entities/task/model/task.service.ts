@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { first, map, Observable } from 'rxjs';
+import { first, map, Observable, Subject, switchMap } from 'rxjs';
 import { FirebaseDataService, TaskCollectionResponse } from 'shared/api';
-import { Task } from './task.model';
+import { Task, TaskEditData } from './task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,4 +22,17 @@ export class TaskService {
       first()
     );
   }
+
+  public editTask(): Observable<TaskEditData> {
+    return this.taskEditSubject.pipe(
+      switchMap((taskEditData: TaskEditData) => {
+        const { apiId, ...taskBody } = taskEditData;
+        return this.data
+          .editTask(taskBody, apiId)
+          .pipe(map(() => ({ ...taskEditData })));
+      })
+    );
+  }
+  public readonly taskEditSubject: Subject<TaskEditData> =
+    new Subject<TaskEditData>();
 }
