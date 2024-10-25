@@ -1,4 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
+import { debounce } from 'shared/lib';
 import { FORM_CONFIGS, FormType } from 'shared/ui';
 import { Task, TaskService } from '../model';
 
@@ -21,5 +22,13 @@ export class TaskComponent {
 
   public setTaskForEdit(): void {
     this.taskOnEdit = { ...this.task };
+  }
+
+  @debounce(1000)
+  public changeTaskCompletion($event: boolean) {
+    this.taskService.taskEditSubject.next({
+      completed: $event,
+      apiId: this.task.apiId,
+    });
   }
 }

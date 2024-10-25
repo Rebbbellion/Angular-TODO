@@ -5,7 +5,7 @@
   [checked]="checkboxInputs.checked"
   (input)="
     checkboxInputs.checked = !checkboxInputs.checked;
-    checkboxInputEvent.emit(checkboxInputs.checked)
+    checkboxInputEvent.emit(this.checkboxInputs.checked)
   "
 />
 <label [for]="'completed-' + checkboxInputs.id">

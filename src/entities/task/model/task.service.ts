@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { debounceTime, first, map, Observable, Subject, switchMap } from 'rxjs';
+import { first, map, Observable, Subject, switchMap } from 'rxjs';
 import { FirebaseDataService, TaskCollectionResponse } from 'shared/api';
 import { Task, TaskEditData } from './task.model';
 
@@ -25,7 +25,6 @@ export class TaskService {
 
   public editTask(): Observable<TaskEditData> {
     return this.taskEditSubject.pipe(
-      debounceTime(500),
       switchMap((taskEditData: TaskEditData) => {
         const { apiId, ...taskBody } = taskEditData;
         return this.data
