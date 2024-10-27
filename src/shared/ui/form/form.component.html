@@ -29,7 +29,7 @@
     ></textarea>
     <label for="task-desc">Task Description</label>
   </div>
-  <div class="checkbox">
+  <div class="checkbox" *ngIf="formConfig.formType === 'edit'">
     <app-checkbox
       (onCheck)="formValues.completed = $event"
       [checkboxInputs]="{ checked: formValues.completed, id: 'form' }"

@@ -17,6 +17,7 @@ app-task {
 .task-counters {
   display: flex;
   justify-content: space-between;
+  gap: 8px;
   margin-bottom: 25px;
   font-weight: 700;
   & span {
@@ -24,6 +25,7 @@ app-task {
     background: rgb(51, 51, 51);
     color: rgb(217, 217, 217);
     border-radius: 50%;
+    display: inline-block;
     margin-left: 8px;
     font-size: 0.875rem;
   }
