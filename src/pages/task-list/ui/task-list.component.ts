@@ -22,6 +22,9 @@ export class TaskListComponent implements OnInit {
     this.data.editTask().subscribe((taskEditData: TaskEditData) => {
       this.editTask(taskEditData);
     });
+    this.data.createTask().subscribe((task: Task) => {
+      this.createTask(task);
+    });
   }
   getNumberOfCompletedTasks(): number {
     return this.tasks.filter(({ completed }) => completed).length;
@@ -44,5 +47,9 @@ export class TaskListComponent implements OnInit {
         (taskToEdit[taskKey] as Task[keyof Task]) = taskEditData[taskKey];
       }
     }
+  }
+
+  createTask(task: Task): void {
+    this.tasks.push(task);
   }
 }

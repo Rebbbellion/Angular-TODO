@@ -7,3 +7,7 @@ export type TaskAPI = {
 export type TaskCollectionResponse = {
   id: TaskAPI;
 };
+
+export type TaskCreationResponse = {
+  name: string;
+};

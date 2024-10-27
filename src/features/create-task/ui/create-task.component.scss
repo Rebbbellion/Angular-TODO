@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  top: -4vh;
+  @media (max-width: 40rem) {
+    flex-direction: column;
+  }
+}
+input {
+  padding: 1rem;
+  border: 1px solid rgb(13, 13, 13);
+  border-radius: 8px;
+  background: rgb(38, 38, 38);
+  color: rgb(242, 242, 242);
+  &::placeholder {
+    color: rgb(128, 128, 128);
+  }
+  flex-grow: 1;
+}

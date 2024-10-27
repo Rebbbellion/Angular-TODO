@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticateRequest } from 'shared/lib';
-import { TaskAPI, TaskCollectionResponse } from './firebase-data.models';
+import {
+  TaskAPI,
+  TaskCollectionResponse,
+  TaskCreationResponse,
+} from './firebase-data.models';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +25,10 @@ export class FirebaseDataService {
     taskId: string
   ): Observable<Partial<TaskAPI>> {
     return this.http.patch<Partial<TaskAPI>>('tasks/' + taskId, task);
+  }
+
+  @AuthenticateRequest()
+  public createTask(task: TaskAPI): Observable<TaskCreationResponse> {
+    return this.http.post<TaskCreationResponse>('tasks', task);
   }
 }
