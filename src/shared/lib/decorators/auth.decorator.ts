@@ -1,7 +1,7 @@
 import { UserCredential } from '@angular/fire/auth';
 import { Observable, switchMap, throwError } from 'rxjs';
 import { FirebaseAuthService, TaskAPI } from 'shared/api';
-import { SharedModule } from '../shared.module';
+import { DecoratorModule } from './decorator.module';
 
 export function AuthenticateRequest() {
   return function (
@@ -12,7 +12,7 @@ export function AuthenticateRequest() {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (...args: TaskAPI[]): Observable<unknown> {
-      const authService = SharedModule.injector.get(FirebaseAuthService);
+      const authService = DecoratorModule.injector.get(FirebaseAuthService);
       return authService
         .registerAnonymousUser()
         .pipe(
