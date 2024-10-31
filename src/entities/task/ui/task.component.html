@@ -1,9 +1,7 @@
 <div class="title-block">
   <h4>{{ task.title }}</h4>
   <div>
-    <svg class="edit" (click)="setTaskForEdit()">
-      <use href="sprite.svg#edit"></use>
-    </svg>
+    <ng-content select="edit"></ng-content>
     <svg class="trash">
       <use href="sprite.svg#trash"></use>
     </svg>
@@ -11,18 +9,9 @@
 </div>
 <div class="desc-block">
   <app-checkbox
-    (onCheck)="task.completed = $event; changeTaskCompletion($event)"
     [checkboxInputs]="{ checked: task.completed, id: task.apiId }"
   ></app-checkbox>
   <p>
     {{ task.desc }}
   </p>
 </div>
-<app-popup *ngIf="taskOnEdit"
-  ><app-form
-    [formConfig]="formConfig"
-    [formValues]="taskOnEdit"
-    (formClose)="taskOnEdit = null"
-    (formSubmit)="taskService.taskEditSubject.next($event)"
-  ></app-form
-></app-popup>

@@ -6,7 +6,7 @@ import {
   TaskCreationResponse,
 } from 'shared/api';
 import { FormValues } from 'shared/ui';
-import { Task, TaskEditData } from './task.model';
+import { Task } from './task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,18 +28,13 @@ export class TaskService {
     );
   }
 
-  public editTask(): Observable<TaskEditData> {
-    return this.taskEditSubject.pipe(
-      switchMap((taskEditData: TaskEditData) => {
-        const { apiId, ...taskBody } = taskEditData;
-        return this.data
-          .editTask(taskBody, apiId)
-          .pipe(map(() => ({ ...taskEditData })));
-      })
+  public editTask(task: Task): Observable<Task> {
+    const { apiId, ...taskBody } = task;
+    return this.data.editTask(taskBody, apiId).pipe(
+      map(() => ({ ...task })),
+      first()
     );
   }
-  public readonly taskEditSubject: Subject<TaskEditData> =
-    new Subject<TaskEditData>();
 
   public createTask(): Observable<Task> {
     return this.taskCreateSubject.pipe(

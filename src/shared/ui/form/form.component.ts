@@ -1,33 +1,26 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, inject, Input, Type } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { FormConfig } from './form.configs';
+import { FormConfig, FormType } from './form.configs';
 import { FormValues } from './form.model';
+import { FormService } from './form.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
 })
-export class FormComponent {
-  @Input() public formValues: FormValues = {
-    title: '',
-    desc: '',
-    completed: false,
-    apiId: '',
-  };
+export class FormComponent<T extends FormType> {
+  public formService: FormService<T> = inject(FormService<T>);
+
+  public readonly formComponentType: Type<FormComponent<T>> = FormComponent<T>;
+
+  @Input() public formValues!: FormValues<T>;
 
   @Input() public formConfig!: FormConfig;
 
-  @Output('formClose')
-  public readonly formCloseEvent: EventEmitter<void> = new EventEmitter<void>();
-
-  @Output('formSubmit')
-  public readonly formSubmitEvent: EventEmitter<FormValues> =
-    new EventEmitter<FormValues>();
-
   public onSubmit(form: NgForm) {
-    this.formSubmitEvent.emit({ ...this.formValues });
+    this.formService.formSubmit.next({ ...this.formValues });
     form.resetForm();
-    this.formCloseEvent.emit();
+    this.formService.formClose();
   }
 }

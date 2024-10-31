@@ -2,16 +2,3 @@
 <button (click)="creationMode = true">
   <app-button [buttonConfig]="formConfig.buttonConfig"></app-button>
 </button>
-<app-popup *ngIf="creationMode"
-  ><app-form
-    [formConfig]="formConfig"
-    [formValues]="{
-      title: taskTitle.value,
-      desc: '',
-      completed: false,
-      apiId: ''
-    }"
-    (formClose)="creationMode = false"
-    (formSubmit)="taskService.taskCreateSubject.next($event)"
-  ></app-form
-></app-popup>

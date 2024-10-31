@@ -7,7 +7,9 @@
     Completed tasks<span>{{ getNumberOfCompletedTasks() }}</span>
   </div>
 </div>
-<app-task *ngFor="let task of tasks" [task]="task"></app-task>
+<app-task *ngFor="let task of tasks" [task]="task">
+  <app-edit-task [task]="task" ngProjectAs="edit"></app-edit-task>
+</app-task>
 <img src="loader.gif" alt="" *ngIf="showLoader" />
 <p class="no-task" *ngIf="tasks.length == 0 && !showLoader">
   You have not created any tasks yet
