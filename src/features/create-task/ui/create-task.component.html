@@ -1,4 +1,9 @@
 <input type="text" #taskTitle placeholder="Enter task title" />
-<button (click)="creationMode = true">
+<button (click)="formValues.title = taskTitle.value; formService.formOpen()">
   <app-button [buttonConfig]="formConfig.buttonConfig"></app-button>
 </button>
+<app-popup *ngIf="formService.showForm"
+  ><div
+    *ngComponentOutlet="formComponentType; inputs: { formConfig, formValues }"
+  ></div
+></app-popup>

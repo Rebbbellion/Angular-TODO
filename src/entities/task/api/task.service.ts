@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { first, map, Observable, Subject, switchMap } from 'rxjs';
+import { first, map, Observable } from 'rxjs';
 import {
   FirebaseDataService,
+  TaskAPI,
   TaskCollectionResponse,
   TaskCreationResponse,
 } from 'shared/api';
-import { FormValues } from 'shared/ui';
 import { Task } from './task.model';
 
 @Injectable({
@@ -36,19 +36,12 @@ export class TaskService {
     );
   }
 
-  public createTask(): Observable<Task> {
-    return this.taskCreateSubject.pipe(
-      switchMap((task: FormValues) => {
-        const { apiId, ...taskBody } = task;
-        return this.data.createTask(taskBody).pipe(
-          map((response: TaskCreationResponse) => ({
-            ...taskBody,
-            apiId: response.name,
-          }))
-        );
-      })
+  public createTask(task: TaskAPI): Observable<Task> {
+    return this.data.createTask(task).pipe(
+      map((response: TaskCreationResponse) => ({
+        ...task,
+        apiId: response.name,
+      }))
     );
   }
-  public readonly taskCreateSubject: Subject<FormValues> =
-    new Subject<FormValues>();
 }

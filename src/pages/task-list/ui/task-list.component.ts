@@ -28,15 +28,8 @@ export class TaskListComponent implements OnInit {
         this.showLoader = false;
       },
     });
-    this.data.createTask().subscribe((task: Task) => {
-      this.createTask(task);
-    });
   }
   getNumberOfCompletedTasks(): number {
     return this.tasks.filter(({ completed }) => completed).length;
-  }
-
-  createTask(task: Task): void {
-    this.tasks.push(task);
   }
 }
