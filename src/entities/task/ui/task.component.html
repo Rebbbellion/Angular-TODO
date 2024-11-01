@@ -8,9 +8,7 @@
   </div>
 </div>
 <div class="desc-block">
-  <app-checkbox
-    [checkboxInputs]="{ checked: task.completed, id: task.apiId }"
-  ></app-checkbox>
+  <ng-content select="toggle"></ng-content>
   <p>
     {{ task.desc }}
   </p>

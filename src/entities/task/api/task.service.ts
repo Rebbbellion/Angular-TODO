@@ -41,7 +41,8 @@ export class TaskService {
       map((response: TaskCreationResponse) => ({
         ...task,
         apiId: response.name,
-      }))
+      })),
+      first()
     );
   }
 }
