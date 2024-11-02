@@ -1,10 +1,10 @@
 <app-create-task [tasks]="tasks"></app-create-task>
 <div class="task-counters">
   <div class="tasks-created">
-    Created tasks<span>{{ numberOfCreatedTasks }}</span>
+    Created tasks<span>{{ numberOfTasks }}</span>
   </div>
   <div class="tasks-completed">
-    Completed tasks<span>{{ getNumberOfCompletedTasks() }}</span>
+    Completed tasks<span>{{ numberOfCompletedTasks }}</span>
   </div>
 </div>
 <app-task *ngFor="let task of tasks" [task]="task">

@@ -10,26 +10,26 @@ export class TaskListComponent implements OnInit {
   private readonly data: TaskService = inject(TaskService);
 
   public tasks: Task[] = [];
-  public numberOfCreatedTasks: number = 0;
   public showLoader: boolean = true;
 
   ngOnInit(): void {
     this.data.getTasks().subscribe({
       next: (tasks: Task[]) => {
         this.tasks = tasks;
-        this.numberOfCreatedTasks = tasks.length;
         this.showLoader = false;
       },
       error: () => {
         this.tasks = [
           { title: 'Offline', desc: '', completed: false, apiId: 'offline' },
         ];
-        this.numberOfCreatedTasks = this.tasks.length;
         this.showLoader = false;
       },
     });
   }
-  getNumberOfCompletedTasks(): number {
+  public get numberOfCompletedTasks(): number {
     return this.tasks.filter(({ completed }) => completed).length;
+  }
+  get numberOfTasks(): number {
+    return this.tasks.length;
   }
 }
