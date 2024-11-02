@@ -31,4 +31,9 @@ export class FirebaseDataService {
   public createTask(task: TaskAPI): Observable<TaskCreationResponse> {
     return this.http.post<TaskCreationResponse>('tasks', task);
   }
+
+  @AuthenticateRequest()
+  public deleteTask(taskId: string): Observable<null> {
+    return this.http.delete<null>('tasks/' + taskId);
+  }
 }
