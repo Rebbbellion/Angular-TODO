@@ -1,0 +1,38 @@
+:host {
+  display: inline-block;
+}
+svg {
+  width: 24px;
+  height: 24px;
+  fill: rgb(128, 128, 128);
+  transition: all 0.3s;
+  cursor: pointer;
+  height: 27px;
+  &:hover {
+    fill: rgb(226, 88, 88);
+  }
+}
+.popup-container {
+  background-color: rgb(61, 61, 61);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  > h3 {
+    margin-bottom: 30px;
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  > button {
+    flex-basis: 100px;
+    &.cancel {
+      > app-button {
+        background-color: red;
+        &:hover {
+          background-color: rgb(226, 88, 88);
+        }
+      }
+    }
+  }
+}

@@ -2,9 +2,7 @@
   <h4>{{ task.title }}</h4>
   <div>
     <ng-content select="edit"></ng-content>
-    <svg class="trash">
-      <use href="sprite.svg#trash"></use>
-    </svg>
+    <ng-content select="delete"></ng-content>
   </div>
 </div>
 <div class="desc-block">

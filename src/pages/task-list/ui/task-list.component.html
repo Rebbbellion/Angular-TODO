@@ -10,6 +10,11 @@
 <app-task *ngFor="let task of tasks" [task]="task">
   <app-edit-task [task]="task" ngProjectAs="edit"></app-edit-task>
   <app-toggle-task [task]="task" ngProjectAs="toggle"></app-toggle-task>
+  <app-delete-task
+    [tasks]="tasks"
+    [task]="task"
+    ngProjectAs="delete"
+  ></app-delete-task>
 </app-task>
 <img src="loader.gif" alt="" *ngIf="showLoader" />
 <p class="no-task" *ngIf="tasks.length == 0 && !showLoader">

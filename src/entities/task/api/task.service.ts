@@ -45,4 +45,8 @@ export class TaskService {
       first()
     );
   }
+
+  public deleteTask(taskId: string): Observable<null> {
+    return this.data.deleteTask(taskId).pipe(first());
+  }
 }
