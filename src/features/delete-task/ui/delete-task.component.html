@@ -1,0 +1,22 @@
+<svg class="trash" (click)="showPopup = true">
+  <use href="sprite.svg#trash"></use>
+</svg>
+<app-popup *ngIf="showPopup">
+  <div class="popup-container">
+    <h3>Do you want to delete task "{{ task.title }}"?</h3>
+    <div class="button-container">
+      <button type="button" (click)="showPopup = false">
+        <app-button
+          class="remove-svg"
+          [buttonConfig]="{ title: 'Yes', svgId: '' }"
+        ></app-button>
+      </button>
+      <button type="button" class="cancel" (click)="showPopup = false">
+        <app-button
+          class="remove-svg"
+          [buttonConfig]="{ title: 'No', svgId: '' }"
+        ></app-button>
+      </button>
+    </div>
+  </div>
+</app-popup>

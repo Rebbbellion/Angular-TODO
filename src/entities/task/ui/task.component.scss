@@ -22,25 +22,6 @@
   margin-bottom: 16px;
   gap: 16px;
 }
-svg {
-  width: 24px;
-  height: 24px;
-  fill: rgb(128, 128, 128);
-  transition: all 0.3s;
-  cursor: pointer;
-}
-.edit {
-  margin-right: 16px;
-  &:hover {
-    fill: rgb(30, 111, 159);
-  }
-}
-.trash {
-  height: 27px;
-  &:hover {
-    fill: rgb(226, 88, 88);
-  }
-}
 .desc-block {
   display: flex;
   align-items: center;

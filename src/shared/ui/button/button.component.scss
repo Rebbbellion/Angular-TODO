@@ -19,4 +19,9 @@
     fill: rgb(242, 242, 242);
     vertical-align: middle;
   }
+  &.remove-svg {
+    > svg {
+      display: none;
+    }
+  }
 }
