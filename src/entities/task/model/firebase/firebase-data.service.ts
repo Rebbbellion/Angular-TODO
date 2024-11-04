@@ -1,18 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 import { first, map, Observable } from 'rxjs';
 import {
-  FirebaseDataService,
+  FirebaseApiService,
   TaskAPI,
   TaskCollectionResponse,
   TaskCreationResponse,
 } from 'shared/api';
-import { Task } from './task.model';
+import { TaskService } from '../task-service.interface';
+import { Task } from '../task.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TaskService {
-  private readonly data: FirebaseDataService = inject(FirebaseDataService);
+export class FirebaseDataService implements TaskService {
+  private readonly data: FirebaseApiService = inject(FirebaseApiService);
 
   public getTasks(): Observable<Task[]> {
     return this.data.getTasks().pipe(

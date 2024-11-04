@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { Task, TaskService } from 'entities/task';
+import { FIREBASE_SERVICE_TOKEN, Task, TaskService } from 'entities/task';
 
 @Component({
   selector: 'app-delete-task',
@@ -7,7 +7,7 @@ import { Task, TaskService } from 'entities/task';
   styleUrl: './delete-task.component.scss',
 })
 export class DeleteTaskComponent {
-  private readonly taskService: TaskService = inject(TaskService);
+  private readonly taskService: TaskService = inject(FIREBASE_SERVICE_TOKEN);
 
   @Input() tasks!: Task[];
   @Input() task!: Task;

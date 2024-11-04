@@ -10,7 +10,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseDataService {
+export class FirebaseApiService {
   private readonly http: HttpClient = inject(HttpClient);
 
   public getTasks(): Observable<TaskCollectionResponse | null> {

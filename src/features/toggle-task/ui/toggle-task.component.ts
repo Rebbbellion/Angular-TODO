@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { Task, TaskService } from 'entities/task';
+import { FIREBASE_SERVICE_TOKEN, Task, TaskService } from 'entities/task';
 import { debounce } from 'shared/lib';
 
 @Component({
@@ -10,7 +10,7 @@ import { debounce } from 'shared/lib';
 export class ToggleTaskComponent {
   @Input() task!: Task;
 
-  private readonly taskService: TaskService = inject(TaskService);
+  private readonly taskService: TaskService = inject(FIREBASE_SERVICE_TOKEN);
 
   @debounce(500)
   public toggleTask(): void {
