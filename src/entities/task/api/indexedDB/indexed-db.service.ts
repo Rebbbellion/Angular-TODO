@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { first, map, Observable, Subscriber } from 'rxjs';
 import { TaskAPI, TaskId } from 'shared/api';
-import { TaskService } from '../task-service.interface';
-import { Task } from '../task.model';
+import { OfflineService } from '../task-service.interface';
+import { Task, TaskStatus } from '../task.model';
 import { idbObservableFactory } from './idb-observable.factory';
 
 @Injectable({
   providedIn: 'root',
 })
-export class IndexedDBService implements TaskService {
+export class IndexedDBService implements OfflineService {
   private initDB(): Observable<IDBDatabase> {
     return new Observable((subscriber: Subscriber<IDBDatabase>) => {
       const dbOpenRequest = indexedDB.open('tasks', 1);
@@ -42,24 +42,29 @@ export class IndexedDBService implements TaskService {
     }).pipe(first());
   }
 
-  createTask(task: TaskAPI): Observable<Task> {
+  createTask(task: TaskAPI, taskStatus: TaskStatus): Observable<Task> {
     return idbObservableFactory<TaskId>(this.initDB(), {
       storeName: 'tasks',
       mode: 'readwrite',
-      action: (store: IDBObjectStore) => store.add(task),
+      action: (store: IDBObjectStore) => store.add({ ...task, taskStatus }),
     }).pipe(
-      map((apiId: TaskId) => ({ ...task, apiId })),
+      map((apiId: TaskId) => ({ ...task, apiId, taskStatus })),
       first()
     );
   }
 
-  editTask(task: TaskAPI, apiId: TaskId): Observable<Task> {
+  editTask(
+    task: TaskAPI,
+    apiId: TaskId,
+    taskStatus: TaskStatus
+  ): Observable<Task> {
     return idbObservableFactory<TaskId>(this.initDB(), {
       storeName: 'tasks',
       mode: 'readwrite',
-      action: (store: IDBObjectStore) => store.put({ ...task, apiId }),
+      action: (store: IDBObjectStore) =>
+        store.put({ ...task, apiId, taskStatus }),
     }).pipe(
-      map((apiId: TaskId) => ({ ...task, apiId })),
+      map((apiId: TaskId) => ({ ...task, apiId, taskStatus })),
       first()
     );
   }
@@ -70,5 +75,19 @@ export class IndexedDBService implements TaskService {
       mode: 'readwrite',
       action: (store) => store.delete(apiId),
     });
+  }
+
+  markAsDeleted(
+    apiId: TaskId,
+    taskStatus: TaskStatus = TaskStatus.Deleted
+  ): Observable<void> {
+    return idbObservableFactory(this.initDB(), {
+      storeName: 'tasks',
+      mode: 'readwrite',
+      action: (store: IDBObjectStore) => store.put({ apiId, taskStatus }),
+    }).pipe(
+      map(() => {}),
+      first()
+    );
   }
 }

@@ -1,12 +1,16 @@
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { FirebaseDataService, Task, TaskService } from 'entities/task';
+import {
+	FirebaseDataService,
+	Task,
+	TaskService
+} from 'entities/task';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import {
-  FORM_CONFIGS,
-  FormComponent,
-  FormConfig,
-  FormType,
-  FormValues,
+	FORM_CONFIGS,
+	FormComponent,
+	FormConfig,
+	FormType,
+	FormValues,
 } from 'shared/ui';
 import { FormService } from 'shared/ui/form/form.service';
 
