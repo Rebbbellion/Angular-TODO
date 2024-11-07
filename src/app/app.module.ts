@@ -13,7 +13,7 @@ import { FirebaseModule } from './firebase';
   imports: [BrowserModule, AppRoutingModule, FirebaseModule, UiModule],
   providers: [
     provideHttpClient(
-      withInterceptors([AuthInterceptor, URLTransformInterceptor])
+      withInterceptors([URLTransformInterceptor, AuthInterceptor])
     ),
   ],
   bootstrap: [AppComponent],
