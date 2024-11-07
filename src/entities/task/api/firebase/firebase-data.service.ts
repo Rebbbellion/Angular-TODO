@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { first, map, Observable } from 'rxjs';
+import { first, map, Observable, tap } from 'rxjs';
 import {
   FirebaseApiService,
   TaskAPI,
@@ -7,6 +7,7 @@ import {
   TaskCreationResponse,
   TaskId,
 } from 'shared/api';
+import { IndexedDBService } from '../indexedDB';
 import { TaskService } from '../task-service.interface';
 import { Task } from '../task.model';
 
@@ -15,6 +16,7 @@ import { Task } from '../task.model';
 })
 export class FirebaseDataService implements TaskService {
   private readonly data: FirebaseApiService = inject(FirebaseApiService);
+  private readonly indexedDB: IndexedDBService = inject(IndexedDBService);
 
   public getTasks(): Observable<Task[]> {
     return this.data.getTasks().pipe(
@@ -26,6 +28,11 @@ export class FirebaseDataService implements TaskService {
             }))
           : []
       ),
+      tap((tasks: Task[]) => {
+        tasks.forEach((task: Task) => {
+          this.indexedDB.createTask(task).subscribe({ error: () => {} });
+        });
+      }),
       first()
     );
   }
@@ -33,6 +40,9 @@ export class FirebaseDataService implements TaskService {
   public editTask(task: TaskAPI, apiId: TaskId): Observable<Task> {
     return this.data.editTask(task, apiId).pipe(
       map(() => ({ ...task, apiId })),
+      tap(() => {
+        this.indexedDB.editTask(task, apiId).subscribe();
+      }),
       first()
     );
   }
@@ -43,11 +53,17 @@ export class FirebaseDataService implements TaskService {
         ...task,
         apiId: response.name,
       })),
+      tap((taskRes: Task) => {
+        this.indexedDB.createTask(taskRes);
+      }),
       first()
     );
   }
 
   public deleteTask(apiId: TaskId): Observable<void> {
-    return this.data.deleteTask(apiId).pipe(first());
+    return this.data.deleteTask(apiId).pipe(
+      tap(() => this.indexedDB.deleteTask(apiId)),
+      first()
+    );
   }
 }

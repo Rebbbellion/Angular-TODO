@@ -57,7 +57,7 @@ export class IndexedDBService implements TaskService {
     return idbObservableFactory<TaskId>(this.initDB(), {
       storeName: 'tasks',
       mode: 'readwrite',
-      action: (store: IDBObjectStore) => store.put(task, apiId),
+      action: (store: IDBObjectStore) => store.put({ ...task, apiId }),
     }).pipe(
       map((apiId: TaskId) => ({ ...task, apiId })),
       first()
