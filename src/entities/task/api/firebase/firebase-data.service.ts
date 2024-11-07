@@ -47,7 +47,7 @@ export class FirebaseDataService implements TaskService {
     );
   }
 
-  public deleteTask(apiId: TaskId): Observable<null> {
+  public deleteTask(apiId: TaskId): Observable<void> {
     return this.data.deleteTask(apiId).pipe(first());
   }
 }
