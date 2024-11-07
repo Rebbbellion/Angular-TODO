@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { FIREBASE_SERVICE_TOKEN, Task, TaskService } from 'entities/task';
+import { FirebaseDataService, Task, TaskService } from 'entities/task';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import {
   FORM_CONFIGS,
@@ -23,7 +23,7 @@ export class EditTaskComponent
   public override formConfig: FormConfig = FORM_CONFIGS[FormType.Edit];
 
   private readonly destroySubject: Subject<void> = new Subject<void>();
-  private readonly taskService: TaskService = inject(FIREBASE_SERVICE_TOKEN);
+  private readonly taskService: TaskService = inject(FirebaseDataService);
 
   @Input() public task!: Task;
 
@@ -32,23 +32,24 @@ export class EditTaskComponent
       .pipe(
         takeUntil(this.destroySubject),
         switchMap((formValues: FormValues<FormType.Edit>) =>
-          this.taskService.editTask(formValues)
+          this.taskService.editTask(formValues, this.task.apiId)
         )
       )
-      .subscribe((taskRes: Task) => {
-        this.editTask(taskRes);
+      .subscribe((task: Task) => {
+        this.editTask(task);
       });
   }
 
   public setFormValues() {
-    this.formValues = { ...this.task };
+    const { apiId, ...taskBody } = this.task;
+    this.formValues = taskBody;
   }
 
-  private editTask(taskRes: Task): void {
-    for (const key in taskRes) {
+  private editTask(task: Task): void {
+    for (const key in task) {
       const taskKey = key as keyof Task;
-      if (taskRes[taskKey] !== undefined) {
-        (this.task[taskKey] as Task[keyof Task]) = taskRes[taskKey];
+      if (task[taskKey] !== undefined) {
+        (this.task[taskKey] as Task[keyof Task]) = task[taskKey];
       }
     }
   }

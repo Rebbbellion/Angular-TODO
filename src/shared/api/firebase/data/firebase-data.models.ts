@@ -11,3 +11,5 @@ export type TaskCollectionResponse = {
 export type TaskCreationResponse = {
   name: string;
 };
+
+export type TaskId = string;

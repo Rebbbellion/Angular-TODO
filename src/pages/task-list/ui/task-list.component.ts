@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FIREBASE_SERVICE_TOKEN, Task, TaskService } from 'entities/task';
+import { FirebaseDataService, Task, TaskService } from 'entities/task';
 import { fadeInOut } from 'shared/lib';
 
 @Component({
@@ -9,7 +9,7 @@ import { fadeInOut } from 'shared/lib';
   animations: [fadeInOut],
 })
 export class TaskListComponent implements OnInit {
-  private readonly data: TaskService = inject(FIREBASE_SERVICE_TOKEN);
+  private readonly data: TaskService = inject(FirebaseDataService);
 
   public tasks: Task[] = [];
   public showLoader: boolean = true;

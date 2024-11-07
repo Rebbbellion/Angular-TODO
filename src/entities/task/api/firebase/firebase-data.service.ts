@@ -5,6 +5,7 @@ import {
   TaskAPI,
   TaskCollectionResponse,
   TaskCreationResponse,
+  TaskId,
 } from 'shared/api';
 import { TaskService } from '../task-service.interface';
 import { Task } from '../task.model';
@@ -19,7 +20,7 @@ export class FirebaseDataService implements TaskService {
     return this.data.getTasks().pipe(
       map((tasks: TaskCollectionResponse | null) =>
         tasks
-          ? Object.keys(tasks).map((taskId: string) => ({
+          ? Object.keys(tasks).map((taskId: TaskId) => ({
               ...tasks[taskId as keyof TaskCollectionResponse],
               apiId: taskId,
             }))
@@ -29,10 +30,9 @@ export class FirebaseDataService implements TaskService {
     );
   }
 
-  public editTask(task: Task): Observable<Task> {
-    const { apiId, ...taskBody } = task;
-    return this.data.editTask(taskBody, apiId).pipe(
-      map(() => ({ ...task })),
+  public editTask(task: TaskAPI, apiId: TaskId): Observable<Task> {
+    return this.data.editTask(task, apiId).pipe(
+      map(() => ({ ...task, apiId })),
       first()
     );
   }
@@ -47,7 +47,7 @@ export class FirebaseDataService implements TaskService {
     );
   }
 
-  public deleteTask(taskId: string): Observable<null> {
-    return this.data.deleteTask(taskId).pipe(first());
+  public deleteTask(apiId: TaskId): Observable<null> {
+    return this.data.deleteTask(apiId).pipe(first());
   }
 }

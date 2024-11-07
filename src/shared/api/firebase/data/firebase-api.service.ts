@@ -5,6 +5,7 @@ import {
   TaskAPI,
   TaskCollectionResponse,
   TaskCreationResponse,
+  TaskId,
 } from './firebase-data.models';
 
 @Injectable({
@@ -17,18 +18,15 @@ export class FirebaseApiService {
     return this.http.get<TaskCollectionResponse>('tasks');
   }
 
-  public editTask(
-    task: Partial<TaskAPI>,
-    taskId: string
-  ): Observable<Partial<TaskAPI>> {
-    return this.http.patch<Partial<TaskAPI>>('tasks/' + taskId, task);
+  public editTask(task: TaskAPI, apiId: TaskId): Observable<TaskAPI> {
+    return this.http.patch<TaskAPI>('tasks/' + apiId, task);
   }
 
   public createTask(task: TaskAPI): Observable<TaskCreationResponse> {
     return this.http.post<TaskCreationResponse>('tasks', task);
   }
 
-  public deleteTask(taskId: string): Observable<null> {
-    return this.http.delete<null>('tasks/' + taskId);
+  public deleteTask(apiId: TaskId): Observable<null> {
+    return this.http.delete<null>('tasks/' + apiId);
   }
 }
