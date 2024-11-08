@@ -9,6 +9,7 @@ import {
   Observable,
   of,
   Subscriber,
+  timeout,
 } from 'rxjs';
 
 @Injectable({
@@ -21,6 +22,7 @@ export class ConnectivityService {
     return this.http
       .get('ping')
       .pipe(
+        timeout(3000),
         map(() => true),
         catchError(() => of(false))
       )

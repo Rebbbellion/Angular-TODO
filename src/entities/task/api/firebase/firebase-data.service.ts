@@ -1,5 +1,6 @@
-import { inject, Injectable } from '@angular/core';
-import { first, map, Observable, tap } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Task, TaskStatus } from 'entities/task/model';
+import { Observable, first, map, tap } from 'rxjs';
 import {
   FirebaseApiService,
   TaskAPI,
@@ -8,13 +9,12 @@ import {
   TaskId,
 } from 'shared/api';
 import { IndexedDBService } from '../indexedDB';
-import { TaskService } from '../task-service.interface';
-import { Task, TaskStatus } from '../task.model';
+import { TaskAPIService } from '../task-service.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseDataService implements TaskService {
+export class FirebaseDataService implements TaskAPIService {
   private readonly data: FirebaseApiService = inject(FirebaseApiService);
   private readonly indexedDB: IndexedDBService = inject(IndexedDBService);
 
@@ -43,7 +43,7 @@ export class FirebaseDataService implements TaskService {
   public editTask(
     task: TaskAPI,
     apiId: TaskId,
-    taskStatus: TaskStatus = TaskStatus.Sync
+    taskStatus: TaskStatus.Sync
   ): Observable<Task> {
     return this.data.editTask(task, apiId).pipe(
       map(() => ({ ...task, apiId, taskStatus })),
@@ -56,7 +56,7 @@ export class FirebaseDataService implements TaskService {
 
   public createTask(
     task: TaskAPI,
-    taskStatus: TaskStatus = TaskStatus.Sync
+    taskStatus: TaskStatus.Sync
   ): Observable<Task> {
     return this.data.createTask(task).pipe(
       map((response: TaskCreationResponse) => ({

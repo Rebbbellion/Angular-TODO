@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { FirebaseDataService, Task, TaskService } from 'entities/task';
+import { Task, TaskDataFacadeService, TaskDataService } from 'entities/task';
 
 @Component({
   selector: 'app-delete-task',
@@ -7,7 +7,7 @@ import { FirebaseDataService, Task, TaskService } from 'entities/task';
   styleUrl: './delete-task.component.scss',
 })
 export class DeleteTaskComponent {
-  private readonly taskService: TaskService = inject(FirebaseDataService);
+  private readonly taskService: TaskDataService = inject(TaskDataFacadeService);
 
   @Input() tasks!: Task[];
   @Input() task!: Task;
@@ -15,11 +15,13 @@ export class DeleteTaskComponent {
   public showPopup: boolean = false;
 
   public deleteTask() {
-    this.taskService.deleteTask(this.task.apiId).subscribe(() => {
-      const taskIndex: number = this.tasks.findIndex(
-        (taskInArr: Task) => taskInArr === this.task
-      );
-      this.tasks.splice(taskIndex, 1);
-    });
+    this.taskService
+      .deleteTask(this.task.apiId, this.task.taskStatus)
+      .subscribe(() => {
+        const taskIndex: number = this.tasks.findIndex(
+          (taskInArr: Task) => taskInArr === this.task
+        );
+        this.tasks.splice(taskIndex, 1);
+      });
   }
 }

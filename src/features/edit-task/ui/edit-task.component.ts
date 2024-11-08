@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { FirebaseDataService, Task, TaskService } from 'entities/task';
+import { Task, TaskDataFacadeService, TaskDataService } from 'entities/task';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import {
   FORM_CONFIGS,
@@ -23,7 +23,7 @@ export class EditTaskComponent
   public override formConfig: FormConfig = FORM_CONFIGS[FormType.Edit];
 
   private readonly destroySubject: Subject<void> = new Subject<void>();
-  private readonly taskService: TaskService = inject(FirebaseDataService);
+  private readonly taskService: TaskDataService = inject(TaskDataFacadeService);
 
   @Input() public task!: Task;
 
@@ -32,7 +32,11 @@ export class EditTaskComponent
       .pipe(
         takeUntil(this.destroySubject),
         switchMap((formValues: FormValues<FormType.Edit>) =>
-          this.taskService.editTask(formValues, this.task.apiId)
+          this.taskService.editTask(
+            formValues,
+            this.task.apiId,
+            this.task.taskStatus
+          )
         )
       )
       .subscribe((task: Task) => {

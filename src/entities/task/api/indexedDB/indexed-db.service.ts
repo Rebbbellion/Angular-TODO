@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { first, map, Observable, Subscriber } from 'rxjs';
 import { TaskAPI, TaskId } from 'shared/api';
+import { Task, TaskStatus } from '../../model/task.model';
 import { OfflineService } from '../task-service.interface';
-import { Task, TaskStatus } from '../task.model';
 import { idbObservableFactory } from './idb-observable.factory';
 
 @Injectable({
