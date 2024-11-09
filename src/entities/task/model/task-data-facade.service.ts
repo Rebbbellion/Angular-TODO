@@ -109,7 +109,7 @@ export class TaskDataFacadeService implements TaskDataService {
 
   deleteTask(apiId: TaskId, taskStatus: TaskStatus): Observable<void> {
     return this.getRequestObservable(
-      taskStatus !== TaskStatus.Sync
+      taskStatus === TaskStatus.New
         ? this.offlineService.deleteTask(apiId)
         : this.offlineService.markAsDeleted(apiId, TaskStatus.Deleted),
       this.onlineService.deleteTask(apiId)
