@@ -5,6 +5,7 @@ import { ButtonConfig } from './button.config';
   selector: 'app-button',
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
+  standalone: false,
 })
 export class ButtonComponent {
   @Input() public buttonConfig: ButtonConfig = {

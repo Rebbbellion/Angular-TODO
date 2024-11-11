@@ -12,6 +12,7 @@ import { fadeInOut } from 'shared/lib';
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
   animations: [fadeInOut],
+  standalone: false,
 })
 export class TaskListComponent implements OnInit {
   private readonly data: TaskDataService = inject(TaskDataFacadeService);

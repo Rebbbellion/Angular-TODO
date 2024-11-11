@@ -8,6 +8,7 @@ import { Task } from '../api';
   host: {
     '[class.completed]': 'task.completed',
   },
+  standalone: false,
 })
 export class TaskComponent {
   @Input() public task!: Task;

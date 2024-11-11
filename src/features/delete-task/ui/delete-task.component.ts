@@ -5,6 +5,7 @@ import { Task, TaskDataFacadeService, TaskDataService } from 'entities/task';
   selector: 'app-delete-task',
   templateUrl: './delete-task.component.html',
   styleUrl: './delete-task.component.scss',
+  standalone: false,
 })
 export class DeleteTaskComponent {
   private readonly taskService: TaskDataService = inject(TaskDataFacadeService);

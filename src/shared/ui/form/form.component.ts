@@ -8,6 +8,7 @@ import { FormService } from './form.service';
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
+  standalone: false,
 })
 export class FormComponent<T extends FormType> {
   public formService: FormService<T> = inject(FormService<T>);

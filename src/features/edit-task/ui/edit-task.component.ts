@@ -15,6 +15,7 @@ import { FormService } from 'shared/ui/form/form.service';
   templateUrl: './edit-task.component.html',
   styleUrl: './edit-task.component.scss',
   providers: [FormService],
+  standalone: false,
 })
 export class EditTaskComponent
   extends FormComponent<FormType.Edit>

@@ -5,6 +5,7 @@ import { CheckboxInputs } from './checkbox-inputs.model';
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.scss',
+  standalone: false,
 })
 export class CheckboxComponent {
   @Input() checkboxInputs!: CheckboxInputs;

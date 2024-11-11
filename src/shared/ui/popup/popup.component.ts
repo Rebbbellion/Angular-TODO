@@ -9,5 +9,6 @@ import { fadeInOut } from 'shared/lib';
   host: {
     '[@fadeInOut]': '',
   },
+  standalone: false,
 })
 export class PopupComponent {}

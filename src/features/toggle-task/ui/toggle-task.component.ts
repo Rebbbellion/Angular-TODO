@@ -6,6 +6,7 @@ import { debounce } from 'shared/lib';
   selector: 'app-toggle-task',
   templateUrl: './toggle-task.component.html',
   styleUrl: './toggle-task.component.scss',
+  standalone: false,
 })
 export class ToggleTaskComponent {
   @Input() task!: Task;

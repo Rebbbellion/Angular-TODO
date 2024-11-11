@@ -15,6 +15,7 @@ import { FormService } from 'shared/ui/form/form.service';
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.scss',
   providers: [FormService],
+  standalone: false,
 })
 export class CreateTaskComponent
   extends FormComponent<FormType.Create>
