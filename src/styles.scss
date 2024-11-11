@@ -7,4 +7,9 @@ body {
   line-height: 1.4;
   color: white;
   background-color: rgb(26, 26, 26);
+  &.lock {
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
 }
