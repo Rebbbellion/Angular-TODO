@@ -7,7 +7,7 @@ export function URLTransformInterceptor(
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> {
   const modifiedReq: HttpRequest<unknown> = req.clone({
-    url: `${environment.firebase.databaseURL}/users/${req.urlWithParams}`,
+    url: `${environment.firebase.databaseURL}/${req.url}.json`,
   });
 
   return next(modifiedReq);

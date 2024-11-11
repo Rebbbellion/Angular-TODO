@@ -12,4 +12,4 @@ export type TaskCreationResponse = {
   name: string;
 };
 
-export type TaskId = string;
+export type TaskId = string | number;

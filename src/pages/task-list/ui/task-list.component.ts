@@ -1,5 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FirebaseDataService, Task, TaskService } from 'entities/task';
+import {
+  Task,
+  TaskDataFacadeService,
+  TaskDataService,
+  TaskStatus,
+} from 'entities/task';
 import { fadeInOut } from 'shared/lib';
 
 @Component({
@@ -9,7 +14,7 @@ import { fadeInOut } from 'shared/lib';
   animations: [fadeInOut],
 })
 export class TaskListComponent implements OnInit {
-  private readonly data: TaskService = inject(FirebaseDataService);
+  private readonly data: TaskDataService = inject(TaskDataFacadeService);
 
   public tasks: Task[] = [];
   public showLoader: boolean = true;
@@ -17,13 +22,13 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.data.getTasks().subscribe({
       next: (tasks: Task[]) => {
-        this.tasks = tasks;
+        this.tasks = tasks.filter(
+          (task: Task) => task.taskStatus !== TaskStatus.Deleted
+        );
         this.showLoader = false;
       },
       error: () => {
-        this.tasks = [
-          { title: 'Offline', desc: '', completed: false, apiId: 'offline' },
-        ];
+        this.tasks = [];
         this.showLoader = false;
       },
     });
@@ -31,7 +36,7 @@ export class TaskListComponent implements OnInit {
   public get numberOfCompletedTasks(): number {
     return this.tasks.filter(({ completed }) => completed).length;
   }
-  get numberOfTasks(): number {
+  public get numberOfTasks(): number {
     return this.tasks.length;
   }
 }

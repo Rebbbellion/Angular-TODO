@@ -9,16 +9,19 @@ export function AuthInterceptor(
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> {
   const fireAuth: FirebaseAuthService = inject(FirebaseAuthService);
-
+  const reqUrlArr: string[] = req.url.split('/');
+  if (reqUrlArr[reqUrlArr.length - 1] === 'ping.json') {
+    return next(req);
+  }
   return fireAuth.registerAnonymousUser().pipe(
     switchMap((credentials: UserCredential) => {
       const user = credentials.user;
-
+      reqUrlArr.splice(3, 0, `users/${user.uid}`);
       return from(user.getIdToken()).pipe(
         first(),
         switchMap((token: string) => {
           const modifiedReq: HttpRequest<unknown> = req.clone({
-            url: `${user.uid}/${req.url}.json`,
+            url: reqUrlArr.join('/'),
             setParams: {
               auth: token,
             },

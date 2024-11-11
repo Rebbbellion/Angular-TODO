@@ -26,7 +26,7 @@ export class FirebaseApiService {
     return this.http.post<TaskCreationResponse>('tasks', task);
   }
 
-  public deleteTask(apiId: TaskId): Observable<null> {
-    return this.http.delete<null>('tasks/' + apiId);
+  public deleteTask(apiId: TaskId): Observable<void> {
+    return this.http.delete<void>('tasks/' + apiId);
   }
 }

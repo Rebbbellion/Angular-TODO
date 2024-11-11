@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { FirebaseDataService, Task, TaskService } from 'entities/task';
+import { Task, TaskDataFacadeService, TaskDataService } from 'entities/task';
 import { debounce } from 'shared/lib';
 
 @Component({
@@ -10,11 +10,11 @@ import { debounce } from 'shared/lib';
 export class ToggleTaskComponent {
   @Input() task!: Task;
 
-  private readonly taskService: TaskService = inject(FirebaseDataService);
+  private readonly taskService: TaskDataService = inject(TaskDataFacadeService);
 
   @debounce(500)
   public toggleTask(): void {
-    const { apiId, ...task } = this.task;
-    this.taskService.editTask(task, apiId).subscribe();
+    const { apiId, taskStatus, ...task } = this.task;
+    this.taskService.editTask(task, apiId, taskStatus).subscribe();
   }
 }
