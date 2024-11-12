@@ -41,8 +41,13 @@ export class CreateTaskComponent
           this.taskService.createTask(formValues)
         )
       )
-      .subscribe((task: Task) => {
-        this.tasks.push(task);
+      .subscribe({
+        next: (task: Task) => {
+          this.tasks.push(task);
+        },
+        error: (err: Error) => {
+          console.log(err.message);
+        },
       });
   }
 

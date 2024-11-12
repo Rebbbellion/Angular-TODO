@@ -18,11 +18,16 @@ export class DeleteTaskComponent {
   public deleteTask() {
     this.taskService
       .deleteTask(this.task.apiId, this.task.taskStatus)
-      .subscribe(() => {
-        const taskIndex: number = this.tasks.findIndex(
-          (taskInArr: Task) => taskInArr === this.task
-        );
-        this.tasks.splice(taskIndex, 1);
+      .subscribe({
+        next: () => {
+          const taskIndex: number = this.tasks.findIndex(
+            (taskInArr: Task) => taskInArr === this.task
+          );
+          this.tasks.splice(taskIndex, 1);
+        },
+        error: (err: Error) => {
+          console.log(err.message);
+        },
       });
   }
 }

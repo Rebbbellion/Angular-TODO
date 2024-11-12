@@ -40,8 +40,13 @@ export class EditTaskComponent
           )
         )
       )
-      .subscribe((task: Task) => {
-        this.editTask(task);
+      .subscribe({
+        next: (task: Task) => {
+          this.editTask(task);
+        },
+        error: (err: Error) => {
+          console.log(err.message);
+        },
       });
   }
 

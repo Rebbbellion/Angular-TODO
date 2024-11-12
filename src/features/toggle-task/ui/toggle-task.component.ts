@@ -16,6 +16,10 @@ export class ToggleTaskComponent {
   @debounce(500)
   public toggleTask(): void {
     const { apiId, taskStatus, ...task } = this.task;
-    this.taskService.editTask(task, apiId, taskStatus).subscribe();
+    this.taskService.editTask(task, apiId, taskStatus).subscribe({
+      error: (err: Error) => {
+        console.log(err.message);
+      },
+    });
   }
 }

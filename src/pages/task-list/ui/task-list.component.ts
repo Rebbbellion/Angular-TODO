@@ -28,8 +28,9 @@ export class TaskListComponent implements OnInit {
         );
         this.showLoader = false;
       },
-      error: () => {
+      error: (err: Error) => {
         this.tasks = [];
+        console.log(err.message);
         this.showLoader = false;
       },
     });
