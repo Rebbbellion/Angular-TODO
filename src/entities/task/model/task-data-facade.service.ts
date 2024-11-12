@@ -49,8 +49,8 @@ export class TaskDataFacadeService implements TaskDataFacade {
       this.connectivityService.onlineStatus.next(true);
       tasks.forEach((task: Task) => {
         this.offlineService
-          .createTask(task, TaskStatus.Sync)
-          .subscribe({ error: () => {} }); // Ignoring error when task exists in DB
+          .editTask(task, task.apiId, TaskStatus.Sync)
+          .subscribe();
       });
     };
 
