@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {
   Task,
+  TaskDataFacade,
   TaskDataFacadeService,
-  TaskDataService,
   TaskStatus,
 } from 'entities/task';
 import { fadeInOut } from 'shared/lib';
@@ -14,7 +14,7 @@ import { fadeInOut } from 'shared/lib';
   animations: [fadeInOut],
 })
 export class TaskListComponent implements OnInit {
-  private readonly data: TaskDataService = inject(TaskDataFacadeService);
+  private readonly data: TaskDataFacade = inject(TaskDataFacadeService);
 
   public tasks: Task[] = [];
   public showLoader: boolean = true;

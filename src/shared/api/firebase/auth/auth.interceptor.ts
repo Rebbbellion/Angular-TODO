@@ -10,9 +10,7 @@ export function AuthInterceptor(
 ): Observable<HttpEvent<unknown>> {
   const fireAuth: FirebaseAuthService = inject(FirebaseAuthService);
   const reqUrlArr: string[] = req.url.split('/');
-  if (reqUrlArr[reqUrlArr.length - 1] === 'ping.json') {
-    return next(req);
-  }
+
   return fireAuth.registerAnonymousUser().pipe(
     switchMap((credentials: UserCredential) => {
       const user = credentials.user;

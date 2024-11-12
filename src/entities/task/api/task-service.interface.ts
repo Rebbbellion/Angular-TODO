@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
 import { TaskAPI, TaskId } from 'shared/api';
-import { ChangeMethodArgs } from 'shared/lib';
 import { Task, TaskStatus } from '../model/task.model';
 
 export interface TaskAPIService {
@@ -20,11 +19,3 @@ export interface OfflineService extends TaskAPIService {
     taskStatus: TaskStatus.Deleted
   ): Observable<void>;
 }
-
-type MethodsArgsToChange = {
-  createTask: [task: TaskAPI];
-  deleteTask: [apiId: TaskId, taskStatus: TaskStatus];
-};
-
-export interface TaskDataService
-  extends ChangeMethodArgs<TaskAPIService, MethodsArgsToChange> {}
