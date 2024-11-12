@@ -1,0 +1,8 @@
+<svg (click)="setFormValues(); formService.formOpen()">
+  <use href="sprite.svg#edit"></use>
+</svg>
+<app-popup *ngIf="formService.showForm">
+  <div
+    *ngComponentOutlet="formComponentType; inputs: { formConfig, formValues }"
+  ></div>
+</app-popup>

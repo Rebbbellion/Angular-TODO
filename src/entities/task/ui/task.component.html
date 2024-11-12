@@ -1,0 +1,13 @@
+<div class="title-block">
+  <h4>{{ task.title }}</h4>
+  <div class="icons">
+    <ng-content select="edit"></ng-content>
+    <ng-content select="delete"></ng-content>
+  </div>
+</div>
+<div class="desc-block">
+  <ng-content select="toggle"></ng-content>
+  <p>
+    {{ task.desc }}
+  </p>
+</div>

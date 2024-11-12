@@ -1,0 +1,14 @@
+:host {
+  position: fixed;
+  overflow: auto;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(13, 13, 13, 0.473);
+}
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}

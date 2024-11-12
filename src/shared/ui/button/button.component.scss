@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: 8px;
+  background: rgb(30, 111, 159);
+  padding: 1rem;
+  transition: background 0.3s;
+  &:hover,
+  &:focus-visible {
+    background: rgb(78, 168, 222);
+  }
+  > svg {
+    width: 16px;
+    height: 16px;
+    fill: rgb(242, 242, 242);
+    vertical-align: middle;
+  }
+  &.remove-svg {
+    > svg {
+      display: none;
+    }
+  }
+}

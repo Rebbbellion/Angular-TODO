@@ -1,0 +1,39 @@
+.check {
+  width: 0;
+  height: 13px;
+  fill: rgb(242, 242, 242);
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  transition: width 0.3s;
+}
+input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  &:checked + label {
+    background-color: rgb(94, 96, 206);
+    border-color: rgb(94, 96, 206);
+    &:hover {
+      background-color: rgb(130, 132, 250);
+      border-color: rgb(130, 132, 250);
+    }
+    & .check {
+      width: 18px;
+    }
+  }
+}
+label {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgb(78, 168, 222);
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(30, 111, 159, 0.2);
+    border-color: rgb(30, 111, 159);
+  }
+}

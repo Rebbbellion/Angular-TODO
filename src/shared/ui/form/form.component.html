@@ -1,0 +1,47 @@
+<form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+  <div class="flex-row">
+    <h3>{{ formConfig.title }}</h3>
+    <button
+      class="cross"
+      type="button"
+      (click)="formService.formClose()"
+    ></button>
+  </div>
+  <div>
+    <input
+      type="text"
+      name="task-title"
+      id="task-title"
+      placeholder="Enter task title"
+      required
+      autocomplete=""
+      [(ngModel)]="formValues.title"
+    />
+    <label for="task-title">Task Title</label>
+  </div>
+  <div>
+    <textarea
+      name="task-desc"
+      id="task-desc"
+      rows="6"
+      placeholder="Enter Task Description (optional)"
+      [(ngModel)]="formValues.desc"
+    ></textarea>
+    <label for="task-desc">Task Description</label>
+  </div>
+  <div class="checkbox" *ngIf="formConfig.formType === 'edit'">
+    <app-checkbox
+      (onCheck)="formValues.completed = $event"
+      [checkboxInputs]="{ checked: formValues.completed, id: 'form' }"
+    ></app-checkbox>
+    <div *ngIf="formValues.completed; else undone">
+      <span @fadeInOut>Completed</span>
+    </div>
+    <ng-template #undone>
+      <div><span @fadeInOut>Undone</span></div>
+    </ng-template>
+  </div>
+  <button type="submit" [disabled]="taskForm.invalid">
+    <app-button [buttonConfig]="formConfig.buttonConfig"></app-button>
+  </button>
+</form>
