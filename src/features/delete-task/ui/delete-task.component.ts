@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { Task, TaskDataFacadeService, TaskDataService } from 'entities/task';
+import { Task, TaskDataFacade, TaskDataFacadeService } from 'entities/task';
 
 @Component({
   selector: 'app-delete-task',
@@ -8,7 +8,7 @@ import { Task, TaskDataFacadeService, TaskDataService } from 'entities/task';
   standalone: false,
 })
 export class DeleteTaskComponent {
-  private readonly taskService: TaskDataService = inject(TaskDataFacadeService);
+  private readonly taskService: TaskDataFacade = inject(TaskDataFacadeService);
 
   @Input() tasks!: Task[];
   @Input() task!: Task;

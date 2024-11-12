@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Task, TaskStatus } from 'entities/task/model';
-import { Observable, first, map, tap } from 'rxjs';
+import { Observable, first, map } from 'rxjs';
 import {
   FirebaseApiService,
   TaskAPI,
@@ -29,13 +29,6 @@ export class FirebaseDataService implements TaskAPIService {
             }))
           : []
       ),
-      tap((tasks: Task[]) => {
-        tasks.forEach((task: Task) => {
-          this.indexedDB
-            .createTask(task, task.taskStatus)
-            .subscribe({ error: () => {} });
-        });
-      }),
       first()
     );
   }
@@ -47,9 +40,6 @@ export class FirebaseDataService implements TaskAPIService {
   ): Observable<Task> {
     return this.data.editTask(task, apiId).pipe(
       map(() => ({ ...task, apiId, taskStatus })),
-      tap(() => {
-        this.indexedDB.editTask(task, apiId, taskStatus).subscribe();
-      }),
       first()
     );
   }
@@ -64,17 +54,11 @@ export class FirebaseDataService implements TaskAPIService {
         apiId: response.name,
         taskStatus,
       })),
-      tap((taskRes: Task) => {
-        this.indexedDB.createTask(taskRes, taskRes.taskStatus);
-      }),
       first()
     );
   }
 
   public deleteTask(apiId: TaskId): Observable<void> {
-    return this.data.deleteTask(apiId).pipe(
-      tap(() => this.indexedDB.deleteTask(apiId).subscribe()),
-      first()
-    );
+    return this.data.deleteTask(apiId).pipe(first());
   }
 }
