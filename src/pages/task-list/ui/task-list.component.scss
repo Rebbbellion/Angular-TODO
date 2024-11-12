@@ -1,0 +1,41 @@
+:host {
+  display: block;
+  width: 80%;
+  padding: 15px 15px 0px;
+  margin: 0px auto;
+  text-align: center;
+  @media (max-width: 48rem) {
+    width: 100%;
+  }
+}
+app-task {
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+.no-task {
+  font-size: 2rem;
+  color: rgb(128, 128, 128);
+}
+.task-counters {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  & span {
+    padding: 2px 8px 2px 8px;
+    background: rgb(51, 51, 51);
+    color: rgb(217, 217, 217);
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 0.875rem;
+  }
+  & .tasks-created {
+    color: rgb(78, 168, 222);
+  }
+  & .tasks-completed {
+    color: rgb(130, 132, 250);
+  }
+}

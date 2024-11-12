@@ -1,0 +1,14 @@
+:host {
+  display: inline-block;
+  margin-right: 16px;
+}
+svg {
+  width: 24px;
+  height: 24px;
+  fill: rgb(128, 128, 128);
+  transition: all 0.3s;
+  cursor: pointer;
+  &:hover {
+    fill: rgb(30, 111, 159);
+  }
+}

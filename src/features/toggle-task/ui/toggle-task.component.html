@@ -1,0 +1,4 @@
+<app-checkbox
+  [checkboxInputs]="{ checked: task.completed, id: task.apiId }"
+  (onCheck)="task.completed = $event; toggleTask()"
+></app-checkbox>
