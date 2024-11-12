@@ -101,6 +101,7 @@ button[type="submit"] {
   user-select: none;
   & div {
     position: relative;
+    word-break: normal;
     & span {
       position: absolute;
       inset: 0;

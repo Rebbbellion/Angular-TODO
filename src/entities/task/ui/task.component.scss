@@ -22,20 +22,14 @@
   font-size: 1.5rem;
   margin-bottom: 16px;
   gap: 16px;
+  > .icons {
+    flex-shrink: 0;
+  }
 }
 .desc-block {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-.check {
-  width: 0;
-  height: 13px;
-  fill: rgb(242, 242, 242);
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  transition: width 0.3s;
 }
 
 h4 {

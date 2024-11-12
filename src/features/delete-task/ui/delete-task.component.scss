@@ -1,5 +1,6 @@
 :host {
   display: inline-block;
+  text-align: center;
 }
 svg {
   width: 24px;
@@ -13,6 +14,7 @@ svg {
   }
 }
 .popup-container {
+  width: 80%;
   background-color: rgb(61, 61, 61);
   border-radius: 8px;
   padding: 2rem 1.5rem;

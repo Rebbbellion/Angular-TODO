@@ -1,5 +1,6 @@
 import { Component, inject, Input, Type } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { fadeInOut } from 'shared/lib';
 import { FormConfig, FormType } from './form.configs';
 import { FormValues } from './form.model';
 import { FormService } from './form.service';
@@ -9,6 +10,7 @@ import { FormService } from './form.service';
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
   standalone: false,
+  animations: [fadeInOut],
 })
 export class FormComponent<T extends FormType> {
   public formService: FormService<T> = inject(FormService<T>);

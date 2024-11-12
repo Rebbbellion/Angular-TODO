@@ -34,9 +34,11 @@
       (onCheck)="formValues.completed = $event"
       [checkboxInputs]="{ checked: formValues.completed, id: 'form' }"
     ></app-checkbox>
-    <div *ngIf="formValues.completed; else undone"><span>Completed</span></div>
+    <div *ngIf="formValues.completed; else undone">
+      <span @fadeInOut>Completed</span>
+    </div>
     <ng-template #undone>
-      <div><span>Undone</span></div>
+      <div><span @fadeInOut>Undone</span></div>
     </ng-template>
   </div>
   <button type="submit" [disabled]="taskForm.invalid">
