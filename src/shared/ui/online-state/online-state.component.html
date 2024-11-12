@@ -1,0 +1,3 @@
+<div [ngClass]="{ online: connectivityService.onlineStatus | async }">
+  {{ (connectivityService.onlineStatus | async) ? "Online" : "Offline" }}
+</div>
