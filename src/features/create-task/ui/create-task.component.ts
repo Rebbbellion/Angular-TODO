@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { Task, TaskDataFacadeService, TaskDataService } from 'entities/task';
+import { Task, TaskDataFacade, TaskDataFacadeService } from 'entities/task';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import {
   FORM_CONFIGS,
@@ -21,7 +21,7 @@ export class CreateTaskComponent
   implements OnInit, OnDestroy
 {
   private readonly destroySubject: Subject<void> = new Subject<void>();
-  public readonly taskService: TaskDataService = inject(TaskDataFacadeService);
+  public readonly taskService: TaskDataFacade = inject(TaskDataFacadeService);
 
   public override formConfig: FormConfig = FORM_CONFIGS[FormType.Create];
   public override formValues: FormValues<FormType.Create> = {
